@@ -15,12 +15,7 @@ app = FastAPI(
 # Configuração de CORS (permite requisições do frontend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",      # Nuxt dev
-        "http://127.0.0.1:3000",
-        "http://localhost:5173",      # Vite dev
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=["*"],  # Permite todas as origens em produção
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
