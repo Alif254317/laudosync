@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from pathlib import Path
 
 from app.routers import audits
 
@@ -27,12 +29,9 @@ app.include_router(audits.router)
 
 @app.get("/")
 async def root():
-    """Endpoint raiz - health check."""
-    return {
-        "status": "online",
-        "service": "LaudoSync API",
-        "version": "1.0.0"
-    }
+    """Serve o frontend HTML."""
+    html_path = Path(__file__).parent / "static" / "index.html"
+    return FileResponse(html_path, media_type="text/html")
 
 
 @app.get("/health")
